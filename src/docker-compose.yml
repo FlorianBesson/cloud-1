@@ -1,0 +1,14 @@
+name: cloud1
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirement/NGINX/.
+    ports:
+      - "8080:80"
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirement/MariaDB/.
+    expose:
+      - "3306"
