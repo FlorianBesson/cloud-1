@@ -20,3 +20,5 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirement/WordPress
+    expose:
+      - "9000"
