@@ -12,3 +12,11 @@ services:
     build: ./requirement/MariaDB/.
     expose:
       - "3306"
+  
+  phpmyadmin:
+    container_name: phpmyadmin
+    build: ./requirement/Phpmyadmin/.
+  
+  wordpress:
+    container_name: wordpress
+    build: ./requirement/WordPress
