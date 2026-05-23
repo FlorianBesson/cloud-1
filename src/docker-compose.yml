@@ -5,7 +5,8 @@ services:
     container_name: nginx
     build: ./requirement/NGINX/.
     ports:
-      - "8080:80"
+      - "8080:80" # todo: change host port number since working at vm
+      - "443:443"
 
   mariadb:
     container_name: mariadb
