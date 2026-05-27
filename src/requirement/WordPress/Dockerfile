@@ -1,6 +1,7 @@
 FROM debian:13.5
 
 # install dependencies of wordpress
+# Ref: https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview
 RUN apt-get update && \
     apt-get install -y \
         apache2 \
@@ -17,7 +18,8 @@ RUN apt-get update && \
         php-mysql \
         php-xml \
         php-zip \
-        curl
+        curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # install wordpress from WordPress.org because this is the preferred method from upstream WordPress. 
 RUN mkdir -p /srv/www && \
