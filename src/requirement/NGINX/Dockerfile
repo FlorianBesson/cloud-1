@@ -7,6 +7,7 @@ RUN apt-get update && \
 RUN mkdir -p /etc/nginx/ssl
 
 # create self certification temporary for the test if it works
+# we need to implement a function make keys by ansible someday
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/ssl.key \
     -out /etc/nginx/ssl/ssl.crt \
