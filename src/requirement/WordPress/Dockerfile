@@ -21,7 +21,7 @@ RUN apt-get update && \
         curl && \
     rm -rf /var/lib/apt/lists/*
 
-# install wordpress from WordPress.org because this is the preferred method from upstream WordPress. 
+# install wordpress from WordPress.org instead of apt because this is the preferred method from upstream WordPress. 
 RUN mkdir -p /srv/www && \
     chown www-data: /srv/www && \
     curl -sL https://wordpress.org/latest.tar.gz | \
