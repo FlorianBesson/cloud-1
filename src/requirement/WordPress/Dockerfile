@@ -4,10 +4,6 @@ FROM debian:13.5
 # Ref: https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview
 RUN apt-get update && \
     apt-get install -y \
-        apache2 \
-        ghostscript \
-        libapache2-mod-php \
-        mariadb-server \
         php \
         php-bcmath \
         php-curl \
@@ -15,7 +11,6 @@ RUN apt-get update && \
         php-intl \
         php-json \
         php-mbstring \
-        php-mysql \
         php-xml \
         php-zip \
         curl && \
