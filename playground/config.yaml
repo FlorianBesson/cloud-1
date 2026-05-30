@@ -1,6 +1,0 @@
-- name: print hello msg
-  hosts: all
-  tasks: 
-  - debug:
-     var: ansible_facts
-
