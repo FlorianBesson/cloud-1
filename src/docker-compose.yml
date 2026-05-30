@@ -1,0 +1,29 @@
+name: cloud1
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirement/NGINX/.
+    ports:
+      - "8080:80" # todo: change host port number since working at vm
+      - "8443:443" # todo: change host port number since working at vm
+    depends_on:
+      - wordpress
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirement/MariaDB/.
+    expose:
+      - "3306"
+    env_file:
+      - .env
+  
+  phpmyadmin:
+    container_name: phpmyadmin
+    build: ./requirement/Phpmyadmin/.
+  
+  wordpress:
+    container_name: wordpress
+    build: ./requirement/WordPress
+    expose:
+      - "9000"
