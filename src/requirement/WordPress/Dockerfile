@@ -14,6 +14,7 @@ RUN apt-get update && \
         php-mbstring \
         php-xml \
         php-zip \
+        wordpress \
         curl && \
     rm -rf /var/lib/apt/lists/*
 
@@ -26,6 +27,11 @@ RUN mkdir -p /srv/www && \
     curl -sL https://wordpress.org/latest.tar.gz | \
     tar -xzf - -C /srv/www && \
     chown -R www-data:www-data srv/www
+
+# install wp-cli for setting up at CUI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 COPY conf/setup.sh /setup.sh
 
