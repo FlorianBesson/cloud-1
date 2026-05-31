@@ -25,6 +25,11 @@ RUN mkdir -p /srv/www && \
     chown www-data: /srv/www && \
     curl -sL https://wordpress.org/latest.tar.gz | \
     tar -xzf - -C /srv/www && \
-    chown -R www-data:www-data /srv/www
+    chown -R www-data:www-data srv/www
 
+COPY conf/setup.sh /setup.sh
+
+RUN chmod +x /setup.sh
+
+ENTRYPOINT ["sh", "setup.sh"]
 CMD ["php-fpm8.4", "-F"]

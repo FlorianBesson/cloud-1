@@ -27,3 +27,5 @@ services:
     build: ./requirement/WordPress
     expose:
       - "9000"
+    env_file:
+      - .env
