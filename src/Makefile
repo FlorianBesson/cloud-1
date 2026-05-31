@@ -1,3 +1,4 @@
+# remove logs. podman is instead of docker and 42 most likely use it
 export PODMAN_COMPOSE_WARNING_LOGS=false
 
 all: up

@@ -6,6 +6,7 @@ cd /srv/www/wordpress
 sleep 10
 
 # set up database of wordpress
+# Ref: https://developer.wordpress.org/cli/commands/config/create/
 wp config create \
     --dbname=${DB_NAME} \
     --dbuser=${DB_USER} \
@@ -13,6 +14,8 @@ wp config create \
     --dbhost=mariadb \
     --allow-root
 
+# create the wordpress tables in the database
+# Ref: https://developer.wordpress.org/cli/commands/core/install/
 wp core install \
     --url=${WP_URL} \
     --title=${WP_TITLE} \
