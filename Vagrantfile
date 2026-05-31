@@ -1,14 +1,15 @@
 Vagrant.configure("2") do |config|
 
     config.vm.box = "debian/bookworm64"
-    config.vm.synced_folder ".", "/home/vagrant/cloud-1", disable: false
+    config.vm.synced_folder ".", "/home/vagrant/cloud-1", disabled: false
 
     config.vm.network "private_network", ip: "192.168.56.110"
-    config.vm.hostname = "cloud.com"
-
+    
+    # the following line doesn't work at 42pc cuz it needs to access /etc/hosts and it is forbidden
+    # config.vm.hostname = "cloud.com"
     # you need to install hostmanager plugin -> vagrant plugin install vagrant-hostmanager
-    config.hostmanager.enable = true
-    config.hostmanager.manage_host = true
+    # config.hostmanager.enabled = true
+    # config.hostmanager.manage_host = true
 
     config.vm.provider "virtualbox" do |vb|
         vb.gui = false
