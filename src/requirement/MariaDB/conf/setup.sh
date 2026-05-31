@@ -1,6 +1,6 @@
 #! /bin/sh
 
-mkdir -p /run/msqld
+mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
 chown -R mysql:mysql /var/lib/mysql
 
@@ -16,4 +16,4 @@ mysql -p"${DB_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p${DB_ROOT_PASSWORD} shutdown
 
-exec mysqld_safe
+exec "$@"

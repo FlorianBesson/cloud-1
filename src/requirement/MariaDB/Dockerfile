@@ -8,4 +8,8 @@ COPY conf/setup.sh /setup.sh
 
 RUN chmod +x /setup.sh
 
-CMD ["sh", "setup.sh"]
+# open for all address in vagrand
+RUN sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+ENTRYPOINT ["sh", "setup.sh"]
+CMD ["mysqld_safe"]
