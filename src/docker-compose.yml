@@ -5,8 +5,8 @@ services:
     container_name: nginx
     build: ./requirement/NGINX/.
     ports:
-      - "8080:80" # todo: change host port number since working at vm
-      - "8443:443" # todo: change host port number since working at vm
+      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress
 
