@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.network "private_network", ip: "192.168.56.110"
     
-    # the following line doesn't work at 42pc cuz it needs to access /etc/hosts and it is forbidden
+    # todo: the following line doesn't work at 42pc cuz it needs to access /etc/hosts and it is forbidden
     # config.vm.hostname = "cloud.com"
     # you need to install hostmanager plugin -> vagrant plugin install vagrant-hostmanager
     # config.hostmanager.enabled = true
