@@ -1,7 +1,11 @@
-# remove logs. podman is instead of docker and 42 most likely use it
-export PODMAN_COMPOSE_WARNING_LOGS=false
+include .env
+export
 
-all: up
+all: set up
+
+set:
+	mkdir -p ${MARIADB_VOLUME_PATH}
+	mkdir -p ${WORDPRESS_VOLUME_PATH}
 
 up:
 	docker compose up --build -d
@@ -11,10 +15,11 @@ down:
 
 clean:
 	docker compose down --rmi all -v
+	sudo rm -rf ${VOLUME_PATH}
 
 ls:
 	docker compose ps
 
-re: clean up
+re: clean set up
 
 .PHONY: all up down clean re
