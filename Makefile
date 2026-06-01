@@ -1,7 +1,10 @@
-# if you don't have enough space in your home, you can define VAGRANT_HOME
-VAGRANTHOME := $(VAGRANT_HOME)
+# if you don't have enough space in your home, you can define VAGRANT_HOME at .env
 
-all: up
+all: set up
+
+set:
+	@set -a && source ./src/.env && set +a && \
+	mkdir -p $${VAGRANT_HOME} && \
 
 up:
 	vagrant up
@@ -12,7 +15,7 @@ down:
 clean: down
 	vagrant destroy -f
 	rm -rf ./.vagrant
-	rm -rf $(VAGRANTHOME)
+	rm -rf $${VAGRANT_HOME}
 
 re: clean up
 
