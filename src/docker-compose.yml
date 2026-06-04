@@ -23,6 +23,8 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     build: ./requirement/Phpmyadmin/.
+    expose:
+      - "9000"
   
   wordpress:
     container_name: wordpress
