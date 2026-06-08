@@ -9,6 +9,9 @@ services:
       - "443:443"
     depends_on:
       - wordpress
+    volumes:
+      - wordpress:/srv/www/wordpress
+      - phpmyadmin:/var/www/phpmyadmin
 
   mariadb:
     container_name: mariadb
@@ -19,13 +22,15 @@ services:
       - .env
     volumes:
       - mariadb:/var/lib/mysql
-  
+
   phpmyadmin:
     container_name: phpmyadmin
     build: ./requirement/Phpmyadmin/.
     expose:
       - "9000"
-  
+    volumes:
+      - phpmyadmin:/var/www/phpmyadmin
+
   wordpress:
     container_name: wordpress
     build: ./requirement/WordPress
@@ -53,4 +58,12 @@ volumes:
     driver_opts:
       type: none
       device: ${WORDPRESS_VOLUME_PATH}
+      o: bind
+
+  phpmyadmin:
+    name: phpmyadmin
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PHPMYADMIN_VOLUME_PATH}
       o: bind

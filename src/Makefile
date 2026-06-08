@@ -6,6 +6,7 @@ all: set up
 set:
 	mkdir -p ${MARIADB_VOLUME_PATH}
 	mkdir -p ${WORDPRESS_VOLUME_PATH}
+	mkdir -p ${PHPMYADMIN_VOLUME_PATH}
 
 up:
 	docker compose up --build -d
