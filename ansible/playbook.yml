@@ -1,0 +1,7 @@
+---
+- name: ansible test
+  hosts: all
+  tasks:
+    - name: output test msg
+      debug:
+        msg: "Hello World!!"

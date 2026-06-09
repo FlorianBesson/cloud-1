@@ -1,7 +1,8 @@
 Vagrant.configure("2") do |config|
 
     config.vm.box = "debian/bookworm64"
-    config.vm.synced_folder ".", "/home/vagrant/cloud-1", disabled: false
+    config.vm.synced_folder "./src", "/home/vagrant/src", disabled: false
+    config.vm.synced_folder "./ansible", "/home/vagrant/ansible", disabled: false
 
     config.vm.network "private_network", ip: "192.168.56.110"
     
@@ -17,7 +18,13 @@ Vagrant.configure("2") do |config|
         vb.cpus = 4
     end
 
+    # install docker
     config.vm.provision :docker
+
+    # install ansible
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "./ansible/playbook.yml"
+    end
 
     config.vm.provision "shell", reboot: true, inline: <<-SHELL
         sudo apt-get update -y
