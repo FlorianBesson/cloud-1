@@ -24,5 +24,7 @@ Vagrant.configure("2") do |config|
     # install ansible
     config.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "./ansible/playbook.yml"
+        ansible.inventory_path = "./ansible/hosts.ini"
+        ansible.limit = "all"
     end
 end

@@ -2,13 +2,27 @@
 # Ref: https://zenn.dev/y_mrok/books/ansible-no-tsukaikata/viewer/chapter8
 
 ---
-- name: setup vagrant vm
-  hosts: all
+# - name: setup vagrant vm
+#   hosts: hostserver
+#   become: yes
+
+#   tasks:
+#     - name: update apt
+#       apt:
+#         update_cache: yes
+
+#     - name: install make
+#       apt:
+#         name: make
+#         state: present
+
+- name: setup scaleway server
+  hosts: webserver
   become: yes
 
   tasks:
-    - name: install make
-      apt:
-        name: make
-        state: present
-        update_cache: yes
+    - name: move src to webserver
+      copy:
+        src: ../src/
+        dest: /root/cloud-1/
+        mode: '0755'
