@@ -1,20 +1,21 @@
 # Ref: https://qiita.com/iineineno03k/items/6842941a18b37879e806
 # Ref: https://zenn.dev/y_mrok/books/ansible-no-tsukaikata/viewer/chapter8
+# ansible-playbook -i ansible/hosts.ini ansible/playbook.yml
 
 ---
-# - name: setup vagrant vm
-#   hosts: hostserver
-#   become: yes
+- name: setup vagrant vm
+  hosts: hostserver
+  become: yes
 
-#   tasks:
-#     - name: update apt
-#       apt:
-#         update_cache: yes
+  tasks:
+    - name: update apt
+      apt:
+        update_cache: yes
 
-#     - name: install make
-#       apt:
-#         name: make
-#         state: present
+    - name: install make
+      apt:
+        name: make
+        state: present
 
 - name: setup scaleway server
   hosts: webserver
@@ -23,6 +24,6 @@
   tasks:
     - name: move src to webserver
       copy:
-        src: ../src/
+        src: /home/vagrant/src/
         dest: /root/cloud-1/
         mode: '0755'
