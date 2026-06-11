@@ -1,2 +1,4 @@
 **/.env
 .vagrant
+**/hosts.ini
+**/private_key

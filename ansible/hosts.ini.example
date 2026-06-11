@@ -1,0 +1,8 @@
+[hostserver]
+0.0.0.0 ansible_user=vagrant
+
+; [webserver]
+; 0.0.0.0 ansible_user=root
+
+[webserver]
+0.0.0.0 ansible_user=vagrant ansible_ssh_private_key_file=./private_key
