@@ -1,7 +1,14 @@
+# Ref: https://qiita.com/iineineno03k/items/6842941a18b37879e806
+# Ref: https://zenn.dev/y_mrok/books/ansible-no-tsukaikata/viewer/chapter8
+
 ---
-- name: ansible test
+- name: setup vagrant vm
   hosts: all
+  become: yes
+
   tasks:
-    - name: output test msg
-      debug:
-        msg: "Hello World!!"
+    - name: install make
+      apt:
+        name: make
+        state: present
+        update_cache: yes

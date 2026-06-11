@@ -25,9 +25,4 @@ Vagrant.configure("2") do |config|
     config.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "./ansible/playbook.yml"
     end
-
-    config.vm.provision "shell", reboot: true, inline: <<-SHELL
-        sudo apt-get update -y
-        sudo apt-get install -y make
-    SHELL
 end
