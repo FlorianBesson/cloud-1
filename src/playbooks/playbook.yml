@@ -1,0 +1,8 @@
+- 
+ name: Play test
+ hosts: localhost
+ tasks:
+   - name: Execute command 'date'
+     command: date
+   - name: Execute command 'neofetch'
+     command: neofetch
