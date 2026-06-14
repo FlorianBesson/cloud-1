@@ -1,0 +1,10 @@
+# src path
+src_path: /home/vagrant/src/
+
+# dest path
+dest_path: /root/cloud-1/
+
+# volume path
+volume_mariadb: /root/volume/mariadb/
+volume_wordpress: /root/volume/wordpress/
+volume_phpmyadmin: /root/volume/phpmyadmin/

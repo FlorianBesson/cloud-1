@@ -3,27 +3,55 @@
 # ansible-playbook -i ansible/hosts.ini ansible/playbook.yml
 
 ---
-- name: setup vagrant vm
-  hosts: hostserver
-  become: yes
+# - name: setup vagrant vm
+#   hosts: hostserver
+#   become: yes
 
-  tasks:
-    - name: update apt
-      apt:
-        update_cache: yes
+#   tasks:
+#     - name: update apt
+#       apt:
+#         update_cache: yes
 
-    - name: install make
-      apt:
-        name: make
-        state: present
+#     - name: install make
+#       apt:
+#         name: make
+#         state: present
 
-- name: setup scaleway server
+- name: Setup scaleway server
   hosts: webserver
   become: yes
+
+  vars_files:
+    - config/vars.yml
 
   tasks:
     - name: move src to webserver
       copy:
-        src: /home/vagrant/src/
-        dest: /root/cloud-1/
+        src: "{{ src_path }}"
+        dest: "{{ dest_path }}"
         mode: '0755'
+
+    - name: Install Docker and Docker Compose
+      apt:
+        pkg:
+          - docker.io
+          - docker-compose-v2
+        state: present
+        update_cache: yes
+
+    - name: Make Directory of Volumes
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ volume_mariadb }}"
+        - "{{ volume_wordpress }}"
+        - "{{ volume_phpmyadmin }}"
+
+#  Ref: https://docs.ansible.com/projects/ansible/latest/collections/community/docker/docker_compose_v2_module.html
+    - name: Deploy using Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ dest_path }}"
+        state: present
+        build: always
