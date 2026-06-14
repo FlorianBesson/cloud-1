@@ -19,12 +19,14 @@ Vagrant.configure("2") do |config|
     end
 
     # install docker
-    config.vm.provision :docker
+    # config.vm.provision :docker
 
     # install ansible
     config.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "./ansible/playbook.yml"
-        ansible.inventory_path = "./ansible/hosts.ini"
-        ansible.limit = "all"
+        ansible.inventory_path = "./ansible/config/hosts.ini"
+        ansible.galaxy_role_file = "./ansible/config/requirements.yml"
+        ansible.version = "latest"
+        ansible.limit = "all" # In order to connect all VM
     end
 end
