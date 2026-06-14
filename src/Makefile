@@ -4,9 +4,9 @@ export
 all: set up
 
 set:
-	mkdir -p ${MARIADB_VOLUME_PATH}
-	mkdir -p ${WORDPRESS_VOLUME_PATH}
-	mkdir -p ${PHPMYADMIN_VOLUME_PATH}
+	mkdir -p ${VOLUME_MARIADB}
+	mkdir -p ${VOLUME_WORDPRESS}
+	mkdir -p ${VOLUME_PHPMYADMIN}
 
 up:
 	docker compose up --build -d
@@ -16,7 +16,7 @@ down:
 
 clean:
 	docker compose down --rmi all -v
-	sudo rm -rf ${VOLUME_PATH}
+	sudo rm -rf ${VOLUME}
 
 ls:
 	docker compose ps

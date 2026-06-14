@@ -3,7 +3,7 @@
 cd /srv/www/wordpress
 # wait to build MariaDB container
 sleep 10
-if [ ! -f /srv/www/wordpress/.setup_done ]; then
+if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
     # set up database of wordpress
     # Ref: https://developer.wordpress.org/cli/commands/config/create/
     wp config create \

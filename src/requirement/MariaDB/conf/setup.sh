@@ -4,7 +4,7 @@ mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
 chown -R mysql:mysql /var/lib/mysql
 
-if [ ! -f "/var/lib/mysql/.setup_done" ]; then
+if [ ! -f "${ROOT_MARIADB}.setup_done" ]; then
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql
     mariadbd --user=mysql --skip-networking & PID="$!"
 

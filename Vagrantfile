@@ -19,7 +19,11 @@ Vagrant.configure("2") do |config|
     end
 
     # install docker
-    # config.vm.provision :docker
+    config.vm.provision :docker
+    # config.vm.provision "shell", inline: <<-SHELL
+    #     sudo apt-get update -y
+    #     sudo apt-get install -y make
+    # end
 
     # install ansible
     config.vm.provision "ansible_local" do |ansible|

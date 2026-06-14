@@ -1,5 +1,7 @@
 FROM debian:13.5
 
+ARG ROOT_WORDPRESS
+
 # install dependencies of wordpress
 # Ref: https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview
 RUN apt-get update && \

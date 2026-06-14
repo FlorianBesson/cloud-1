@@ -10,8 +10,8 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress:/srv/www/wordpress
-      - phpmyadmin:/var/www/phpmyadmin
+      - wordpress:${ROOT_WORDPRESS}
+      - phpmyadmin:${ROOT_PHPMYADMIN}
 
   mariadb:
     container_name: mariadb
@@ -21,15 +21,20 @@ services:
     env_file:
       - .env
     volumes:
-      - mariadb:/var/lib/mysql
+      - mariadb:${ROOT_MARIADB}
 
   phpmyadmin:
     container_name: phpmyadmin
-    build: ./requirement/Phpmyadmin/.
+    build:
+      context: ./requirement/Phpmyadmin/.
+      args:
+        - ROOT_PHPMYADMIN=${ROOT_PHPMYADMIN}
     expose:
       - "9000"
     volumes:
-      - phpmyadmin:/var/www/phpmyadmin
+      - phpmyadmin:${ROOT_PHPMYADMIN}
+    env_file:
+      - .env
 
   wordpress:
     container_name: wordpress
@@ -41,7 +46,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress:/srv/www/wordpress
+      - wordpress:${ROOT_WORDPRESS}
 
 volumes:
   mariadb:
@@ -49,7 +54,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${MARIADB_VOLUME_PATH}
+      device: ${VOLUME_MARIADB}
       o: bind
 
   wordpress:
@@ -57,7 +62,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${WORDPRESS_VOLUME_PATH}
+      device: ${VOLUME_WORDPRESS}
       o: bind
 
   phpmyadmin:
@@ -65,5 +70,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PHPMYADMIN_VOLUME_PATH}
+      device: ${VOLUME_PHPMYADMIN}
       o: bind
