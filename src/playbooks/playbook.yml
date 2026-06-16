@@ -1,8 +1,21 @@
 - 
  name: Play test
  hosts: localhost
+ vars:
+   packages:
+    - name: vim
+      required: true
+    - name: neofetch
+      required: true
+    - name: mysql
+      required: false
+
  tasks:
-   - name: Execute command 'date'
-     command: date
-   - name: Execute command 'neofetch'
+   - name: 'Install {{item.name}} on scw server'
+     apt: 
+        - name: "{item.name}"
+          state: present
+   - name: 'Execute command neofetch'
      command: neofetch
+     
+     loop: "{{packages}}"
