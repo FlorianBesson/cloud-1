@@ -1,5 +1,5 @@
 # if you don't have enough space in your home, you can define VAGRANT_HOME at .env
-include ./src/.env
+include ./.env
 export
 
 all: set up
