@@ -31,20 +31,20 @@ services:
         - ROOT_PHPMYADMIN=${ROOT_PHPMYADMIN}
     expose:
       - "9000"
-    volumes:
-      - phpmyadmin:${ROOT_PHPMYADMIN}
     env_file:
       - .env
+    volumes:
+      - phpmyadmin:${ROOT_PHPMYADMIN}
 
   wordpress:
     container_name: wordpress
     build: ./requirement/WordPress
     expose:
       - "9000"
-    env_file:
-      - .env
     depends_on:
       - mariadb
+    env_file:
+      - .env
     volumes:
       - wordpress:${ROOT_WORDPRESS}
 
