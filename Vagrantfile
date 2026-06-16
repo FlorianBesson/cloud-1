@@ -18,8 +18,8 @@ Vagrant.configure("2") do |config|
         vb.cpus = 4
     end
 
-    # install docker
-    config.vm.provision :docker
+    # install docker and make
+    # config.vm.provision :docker
     # config.vm.provision "shell", inline: <<-SHELL
     #     sudo apt-get update -y
     #     sudo apt-get install -y make

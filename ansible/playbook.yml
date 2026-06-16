@@ -3,20 +3,6 @@
 # ansible-playbook -i ansible/hosts.ini ansible/playbook.yml
 
 ---
-# - name: setup vagrant vm
-#   hosts: hostserver
-#   become: yes
-
-#   tasks:
-#     - name: update apt
-#       apt:
-#         update_cache: yes
-
-#     - name: install make
-#       apt:
-#         name: make
-#         state: present
-
 - name: Setup scaleway server
   hosts: webserver
   become: yes
