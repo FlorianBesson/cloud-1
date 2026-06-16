@@ -19,8 +19,8 @@ clean: down
 	rm -rf ./.vagrant
 
 fclean: clean
-	rm -rf ${VBOX_VM_PATH}
+	rm -rf ${VAGRANT_HOME}
 
-re: fclean set up
+re: clean set up
 
 .PHONY: all up down clean fclean re
