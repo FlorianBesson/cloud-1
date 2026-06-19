@@ -17,10 +17,10 @@ RUN apt-get update && \
 RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/8.4/fpm/pool.d/www.conf
 
 # install wordpress from WordPress.org instead of apt because this is the preferred method from upstream WordPress. 
-RUN mkdir -p /srv/www/wordpress && \
-    chown www-data: /srv/www/wordpress && \
+RUN mkdir -p ${ROOT_WORDPRESS} && \
+    chown www-data: ${ROOT_WORDPRESS} && \
     curl -sL https://wordpress.org/latest.tar.gz | \
-    tar -xzf - -C /srv/www/wordpress --strip-components=1 && \
+    tar -xzf - -C ${ROOT_WORDPRESS} --strip-components=1 && \
     chown -R www-data:www-data srv/www
 
 # install wp-cli for setting up at CUI
