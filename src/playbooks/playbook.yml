@@ -10,9 +10,22 @@
       - name: cowsay
         required: false
    tasks:
-     - name: 'Install {{ item.name }} on scw server'
+     - name: 'Install predefined packages on scw server'
        apt: 
             name: "{{ item.name }}"
             state: present
+       when: item.required == True 
+        
        loop: "{{ packages }}"
+
+     # - name: 'test if we need reboot servor'
+     #   command: needs-restarting -r
+     #   register: needs_reboot
+     #   changed_when: needs_reboot.rc == 1
+     #   failed_when: needs_reboot.rc not in [0, 1]
+     #   become: true
+
 ...
+
+
+

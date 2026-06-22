@@ -1,0 +1,29 @@
+# vagrantfile infos
+# `config.vm.box`               | Choisit le système d’exploitation           
+# `config.vm.network`           | Définit IPs et communication entre VMs      
+# `config.vm.provider`          | Réglages VirtualBox (RAM, CPU, nom)         
+# `config.vm.define`            | Crée plusieurs machines dans le même projet 
+# `config.vm.provision`         | Lance des scripts d’installation automatique
+# `.vagrant` dossier            | Contient les infos d’état des VMs           
+# `vagrant up / halt / destroy` | Commandes de gestion                        
+
+TEAM_LOGIN = "fbesson"  #subject mandatory
+SERVER_IP  = "192.168.56.110" #subject mandatory
+
+Vagrant.configure("2") do |config|
+  #setup vm on ubuntu, sync folder, ssh
+  config.vm.box = "ubuntu/jammy64"
+  config.ssh.insert_key = true
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+
+  config.vm.define "#{TEAM_LOGIN}S" do |srv|
+    srv.vm.hostname = "#{TEAM_LOGIN}S"
+    srv.vm.network "private_network", ip: SERVER_IP
+    srv.vm.provider "virtualbox" do |vb|
+      vb.name   = "#{TEAM_LOGIN}S"
+      vb.cpus = 2
+      vb.memory = 2048 #can fit in 1gb
+    end
+  end
+end
+
