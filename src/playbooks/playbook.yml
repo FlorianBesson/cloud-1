@@ -1,31 +1,31 @@
 ---
- - name: Play test
-   hosts: servers
-   vars:
-     packages:
+- name: Play test
+  hosts: servers
+  become: true
+
+  vars:
+    packages:
       - name: vim
         required: true
       - name: neofetch
         required: true
       - name: cowsay
         required: false
-   tasks:
-     - name: 'Install predefined packages on scw server'
-       apt: 
-            name: "{{ item.name }}"
-            state: present
-       when: item.required == True 
-        
-       loop: "{{ packages }}"
 
-     # - name: 'test if we need reboot servor'
-     #   command: needs-restarting -r
-     #   register: needs_reboot
-     #   changed_when: needs_reboot.rc == 1
-     #   failed_when: needs_reboot.rc not in [0, 1]
-     #   become: true
+  tasks:
+    - name: Enable universe repository
+      apt_repository:
+        repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} universe"
+        state: present
+      when: ansible_distribution == "Ubuntu"
 
-...
+    - name: Update apt cache
+      apt:
+        update_cache: true
 
-
-
+    - name: Install predefined packages
+      apt:
+        name: "{{ item.name }}"
+        state: present
+      when: item.required | bool
+      loop: "{{ packages }}"
