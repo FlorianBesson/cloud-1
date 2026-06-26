@@ -1,19 +1,15 @@
 FROM debian:13.5
 
+ARG ROOT_WORDPRESS
+
 # install dependencies of wordpress
 # Ref: https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview
 RUN apt-get update && \
     apt-get install -y \
         php-fpm \
         php-mysql \
-        php-bcmath \
-        php-curl \
-        php-imagick \
-        php-intl \
-        php-json \
         php-mbstring \
-        php-xml \
-        php-zip \
+        wordpress \
         curl && \
     rm -rf /var/lib/apt/lists/*
 
@@ -21,10 +17,20 @@ RUN apt-get update && \
 RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/8.4/fpm/pool.d/www.conf
 
 # install wordpress from WordPress.org instead of apt because this is the preferred method from upstream WordPress. 
-RUN mkdir -p /srv/www && \
-    chown www-data: /srv/www && \
+RUN mkdir -p ${ROOT_WORDPRESS} && \
+    chown www-data: ${ROOT_WORDPRESS} && \
     curl -sL https://wordpress.org/latest.tar.gz | \
-    tar -xzf - -C /srv/www && \
-    chown -R www-data:www-data /srv/www
+    tar -xzf - -C ${ROOT_WORDPRESS} --strip-components=1 && \
+    chown -R www-data:www-data srv/www
 
+# install wp-cli for setting up at CUI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
+
+COPY conf/setup.sh /setup.sh
+
+RUN chmod +x /setup.sh
+
+ENTRYPOINT ["sh", "setup.sh"]
 CMD ["php-fpm8.4", "-F"]

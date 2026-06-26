@@ -3,10 +3,13 @@ services:
     container_name: nginx
     build: ./requirement/NGINX/.
     ports:
-      - "8080:80" # todo: change host port number since working at vm
-      - "8443:443" # todo: change host port number since working at vm
+      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress
+    volumes:
+      - wordpress:${ROOT_WORDPRESS}
+      - phpmyadmin:${ROOT_PHPMYADMIN}
 
   mariadb:
     container_name: db
@@ -15,13 +18,58 @@ services:
       - "3306"
     env_file:
       - .env
-  
+    volumes:
+      - mariadb:${ROOT_MARIADB}
+
   phpmyadmin:
-    container_name: php
-    build: ./requirement/Phpmyadmin/.
-  
-  wordpress:
-    container_name: wp
-    build: ./requirement/WordPress
+    container_name: phpmyadmin
+    build:
+      context: ./requirement/Phpmyadmin/.
+      args:
+        - ROOT_PHPMYADMIN=${ROOT_PHPMYADMIN} # Due to able to use env vars at Dockerfile
     expose:
       - "9000"
+    env_file:
+      - .env
+    volumes:
+      - phpmyadmin:${ROOT_PHPMYADMIN}
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirement/WordPress/.
+      args:
+        - ROOT_WORDPRESS=${ROOT_WORDPRESS}
+    expose:
+      - "9000"
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - wordpress:${ROOT_WORDPRESS}
+
+volumes:
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUME_MARIADB}
+      o: bind
+
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUME_WORDPRESS}
+      o: bind
+
+  phpmyadmin:
+    name: phpmyadmin
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUME_PHPMYADMIN}
+      o: bind
