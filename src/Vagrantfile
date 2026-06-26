@@ -7,18 +7,22 @@
 # `.vagrant` dossier            | Contient les infos d’état des VMs           
 # `vagrant up / halt / destroy` | Commandes de gestion                        
 
-TEAM_LOGIN = "fbesson"  #subject mandatory
-SERVER_IP  = "192.168.56.110" #subject mandatory
+TEAM_LOGIN = "fbesson"  
+SERVER_IP  = "192.168.56.10" 
+SERVER_NETMASK  = "255.255.255.0" 
 
 Vagrant.configure("2") do |config|
   #setup vm on ubuntu, sync folder, ssh
   config.vm.box = "ubuntu/jammy64"
   config.ssh.insert_key = true
+  # config.ssh.username = "florian"
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
   config.vm.define "#{TEAM_LOGIN}S" do |srv|
     srv.vm.hostname = "#{TEAM_LOGIN}S"
-    srv.vm.network "private_network", ip: SERVER_IP
+    srv.vm.network "private_network", 
+      ip: SERVER_IP,
+      netmask: SERVER_NETMASK  
     srv.vm.provider "virtualbox" do |vb|
       vb.name   = "#{TEAM_LOGIN}S"
       vb.cpus = 2

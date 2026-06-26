@@ -9,7 +9,7 @@ services:
       - wordpress
 
   mariadb:
-    container_name: mariadb
+    container_name: db
     build: ./requirement/MariaDB/.
     expose:
       - "3306"
@@ -17,11 +17,11 @@ services:
       - .env
   
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: php
     build: ./requirement/Phpmyadmin/.
   
   wordpress:
-    container_name: wordpress
+    container_name: wp
     build: ./requirement/WordPress
     expose:
       - "9000"
