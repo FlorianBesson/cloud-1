@@ -2,6 +2,17 @@
 include ./.env
 export
 
+<<<<<<< Updated upstream
+=======
+ENV_FILE		:= .env
+ENV_EXAMPLE		:= .env.example
+SRC_ENV_FILE	:= src/.env
+SRC_ENV_EXAMPLE	:= src/.env.example
+HOSTS_FILE		:= ansible/hosts.ini
+HOSTS_EXAMPLE	:= ansible/hosts.ini.example
+TEST_PATH		:= ../test_server
+
+>>>>>>> Stashed changes
 all: set up
 
 set:
