@@ -2,8 +2,6 @@ FROM debian:13.5
 
 ARG ROOT_MARIADB
 
-
-exec "$@"
 RUN apt-get update && \
     apt-get install -y mariadb-server && \
     rm -rf /var/lib/apt/lists/*

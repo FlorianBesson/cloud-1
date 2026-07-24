@@ -1,9 +1,4 @@
 **/.env
-<<<<<<< HEAD
-.env
-src/.env
-=======
 .vagrant
 **/hosts.ini
 **/private_key
->>>>>>> kosnakam

@@ -19,3 +19,5 @@ if [ ! -f "${ROOT_MARIADB}.setup_done" ]; then
     mysqladmin -u root -p${DB_ROOT_PASSWORD} shutdown
     wait "$PID"
 fi
+
+exec "$@"
