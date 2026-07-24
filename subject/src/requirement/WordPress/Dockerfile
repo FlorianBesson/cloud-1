@@ -7,7 +7,6 @@ ARG ROOT_WORDPRESS
 RUN apt-get update && \
     apt-get install -y \
         php-fpm \
-        vim \
         php-mysql \
         php-mbstring \
         wordpress \

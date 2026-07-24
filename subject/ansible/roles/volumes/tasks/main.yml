@@ -1,0 +1,9 @@
+    - name: Make Directory of Volumes
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ volume_mariadb }}"
+        - "{{ volume_wordpress }}"
+        - "{{ volume_phpmyadmin }}"
