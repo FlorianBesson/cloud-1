@@ -2,3 +2,4 @@
 .vagrant
 **/hosts.ini
 **/private_key
+**/private_scw
