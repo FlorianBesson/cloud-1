@@ -14,6 +14,9 @@ if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
         --dbhost=mariadb \
         --allow-root
 
+    wp config set WP_HOME '((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on") ? "https://" : "http://") . $_SERVER["HTTP_HOST"]' --raw --allow-root
+    wp config set WP_SITEURL '((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on") ? "https://" : "http://") . $_SERVER["HTTP_HOST"]' --raw --allow-root
+
     # create the wordpress tables in the database
     # Ref: https://developer.wordpress.org/cli/commands/core/install/
     wp core install \
