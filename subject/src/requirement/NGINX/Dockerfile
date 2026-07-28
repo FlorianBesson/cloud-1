@@ -2,6 +2,7 @@ FROM debian:13.5
 
 RUN apt-get update && \
     apt-get install -y nginx openssl && \
+    rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/nginx/ssl

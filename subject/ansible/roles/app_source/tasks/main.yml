@@ -1,0 +1,5 @@
+    - name: move src to webserver
+      copy:
+        src: "{{ src_path }}"
+        dest: "{{ dest_path }}"
+        mode: '0755'
