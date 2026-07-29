@@ -36,12 +36,6 @@ if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
         --post_status=publish \
         --path=${ROOT_WORDPRESS} \
         --allow-root
-    wp post create \
-        --post_title='new' \
-        --post_content='post' \
-        --post_status=publish \
-        --path=${ROOT_WORDPRESS} \
-        --allow-root
 fi
 
 exec "$@"
