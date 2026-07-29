@@ -2,7 +2,6 @@
 
 cd ${ROOT_WORDPRESS}
 # wait to build MariaDB container
-sleep 10
 if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
 
     # set up database of wordpress
@@ -36,6 +35,8 @@ if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
         --post_status=publish \
         --path=${ROOT_WORDPRESS} \
         --allow-root
+
+    touch ${ROOT_WORDPRESS}.setup_done 
 fi
 
 exec "$@"
