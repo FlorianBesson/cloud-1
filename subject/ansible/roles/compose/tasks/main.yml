@@ -1,0 +1,5 @@
+    - name: Deploy using Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ dest_path }}"
+        state: present
+        build: always

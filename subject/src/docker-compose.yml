@@ -3,6 +3,7 @@ name: cloud1
 services:
   nginx:
     container_name: nginx
+    restart: unless-stopped
     build: ./requirement/NGINX/.
     ports:
       - "80:80"
@@ -15,6 +16,7 @@ services:
 
   mariadb:
     container_name: mariadb
+    restart: unless-stopped
     build: ./requirement/MariaDB/.
     expose:
       - "3306"
@@ -25,6 +27,7 @@ services:
 
   phpmyadmin:
     container_name: phpmyadmin
+    restart: unless-stopped
     build:
       context: ./requirement/Phpmyadmin/.
       args:
@@ -38,6 +41,7 @@ services:
 
   wordpress:
     container_name: wordpress
+    restart: unless-stopped
     build:
       context: ./requirement/WordPress/.
       args:
