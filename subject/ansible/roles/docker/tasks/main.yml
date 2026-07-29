@@ -3,5 +3,6 @@
         pkg:
           - docker.io
           - docker-compose-v2
+          - docker-buildx
         state: present
         update_cache: yes
