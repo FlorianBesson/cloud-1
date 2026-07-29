@@ -2,6 +2,7 @@
 
 cd ${ROOT_WORDPRESS}
 # wait to build MariaDB container
+sleep 10
 if [ ! -f ${ROOT_WORDPRESS}.setup_done ]; then
 
     # set up database of wordpress
